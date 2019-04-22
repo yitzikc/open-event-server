@@ -15,11 +15,11 @@ x-defaults: &defaults
   depends_on:
     - postgres
     - redis
-    - elastic
+ #   - elastic
   links:
     - postgres:postgres
     - redis:redis
-    - elastic:elastic
+#    - elastic:elastic
   volumes:
     - ./static:/data/app/static
 
@@ -44,17 +44,17 @@ services:
     volumes:
       - rd:/var/lib/redis/data
 
-  elastic:
-    image: elasticsearch:5.6.12-alpine
-    container_name: opev-elastic-search
-    restart: unless-stopped
-    environment:
-        - discovery.type=single-node
-    volumes:
-        - es:/usr/share/elasticsearch/data
-    ports:
-        - 9200:9200
-        - 9300:9300
+  # elastic:
+  #   image: elasticsearch:5.6.12-alpine
+  #   container_name: opev-elastic-search
+  #   restart: unless-stopped
+  #   environment:
+  #       - discovery.type=single-node
+  #   volumes:
+  #       - es:/usr/share/elasticsearch/data
+  #   ports:
+  #       - 9200:9200
+  #       - 9300:9300
 
   web:
     <<: *defaults
