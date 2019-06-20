@@ -50,8 +50,6 @@ services:
     restart: unless-stopped
     environment:
         - discovery.type=single-node
-        # FIXME: Verify that other values of ELASTIC_MEM_SIZE are in fact accepted
-        - "ES_JAVA_OPTS=-Xms${ELASTIC_MEM_SIZE:-256m} -Xmx${ELASTIC_MEM_SIZE:-256m}"
     volumes:
         - es:/usr/share/elasticsearch/data
     ports:
