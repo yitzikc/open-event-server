@@ -44,6 +44,8 @@ services:
     volumes:
       - rd:/var/lib/redis/data
 
+# FIXME: Allow the exposure of ports by the 'elastic' and 'web' containers
+# to be customised using an environment variable. For now, hardcoding 127.0.0.1
   elastic:
     image: elasticsearch:5.6.12-alpine
     container_name: opev-elastic-search
@@ -53,14 +55,16 @@ services:
     volumes:
         - es:/usr/share/elasticsearch/data
     ports:
-        - 9200:9200
-        - 9300:9300
+        - 127.0.0.1:9200:9200
+        - 127.0.0.1:9300:9300
 
   web:
     <<: *defaults
     container_name: opev-web
-    ports:
-      - 8080:8080
+    # Uncomment 'ports' below if you want direct HTTP access to the port. If you're using a reverse-proxy
+    # as front-end you should probably leave this commented-out.
+    #ports:
+    #  - 127.0.0.1:8080:8080
 
   celery:
     <<: *defaults
