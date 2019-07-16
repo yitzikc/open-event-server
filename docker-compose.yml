@@ -46,7 +46,7 @@ services:
     <<: *defaults
     container_name: opev-web
     environment:
-      # TODO: Check if we need to pass environment variables here from *environment-vars
+      <<: *environment-vars
       S3_USE_SIGV4: "True"
     # Uncomment 'ports' below if you want direct HTTP access to the port. If you're using a reverse-proxy
     # as front-end you should probably leave this commented-out.
