@@ -203,7 +203,7 @@ def upload_to_aws(bucket_name, aws_region, aws_key, aws_secret, file, key, acl='
     http://{bucket}.s3.amazonaws.com/{key}
     """
 
-    if '.' in bucket_name and aws_region and aws_region != '':
+    if aws_region and aws_region != '':
         conn = boto.s3.connect_to_region(
             aws_region,
             aws_access_key_id=aws_key,
